@@ -26,7 +26,7 @@ const InventorySchema = new Schema<Inventory>({
 
 })
 
-const productSchema = new Schema<Product>({
+const ProductSchema= new Schema<Product>({
      name : {type : String, required: true},
      description : {type : String, required : true},
      price : {type : Number, required : true},
@@ -41,3 +41,5 @@ const productSchema = new Schema<Product>({
 
 
 })
+
+ export const ProductModel = model<Product>('product', ProductSchema )
