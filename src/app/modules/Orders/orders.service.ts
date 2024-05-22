@@ -8,6 +8,16 @@ const createNewOrder = async(order : OrdersT) =>{
   return result;
 }
 
+const getAllOrders = async (email: unknown) => {
+    if (typeof email === 'string') {
+      const result = await orderModel.find({ email })
+      return result
+    }
+    const result = await orderModel.find()
+    return result
+  }
+
 export const orderService = {
-    createNewOrder
+    createNewOrder,
+    getAllOrders
 }
