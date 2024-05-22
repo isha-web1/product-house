@@ -1,6 +1,8 @@
 import { ProductModel } from "../products.model";
 import { Product } from "./products.interface";
 
+// POST all product to DB
+
 const createProductIntoDb = async(product : Product) =>{
 
    const result = await ProductModel.create(product)
@@ -8,6 +10,14 @@ const createProductIntoDb = async(product : Product) =>{
 
 }
 
+// get all product from DB
+
+const getAllProductsFromDb = async()=>{
+    const result = await ProductModel.find();
+    return result
+}
+
 export const productServices ={
-    createProductIntoDb
+    createProductIntoDb,
+    getAllProductsFromDb
 }
