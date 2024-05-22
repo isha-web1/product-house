@@ -31,9 +31,17 @@ const updateProductInfo = async(id:string, updateData : Partial<ProductT>)=>{
     return result;
 }
 
+// Delete a Product through id
+
+const deleteProductFromDB = async (id: string) => {
+    const result = await ProductModel.deleteOne({ _id: id });
+    return result;
+  };
+
 export const productServices ={
     createProductIntoDb,
     getAllProductsFromDb,
     getSingleProductFromDb,
-    updateProductInfo
+    updateProductInfo,
+    deleteProductFromDB
 }

@@ -16,7 +16,7 @@ const createProduct = async(req : Request, res : Response) =>{
     // send response
     res.status(200).json({
         success : true,
-        message : 'Product created successfully!',
+        message : "Product created successfully!",
         data : result
     })
 
@@ -32,7 +32,7 @@ const getAllProducts = async(req: Request, res : Response) =>{
 
         res.status(200).json({
             success : true,
-            message : 'Products fetched successfully!',
+            message : "Products fetched successfully!",
             data : result
         })
 
@@ -47,19 +47,19 @@ const getProductById = async (req: Request, res: Response) => {
       if (!result) {
         return res.status(401).json({
           success: false,
-          message: 'Product not found',
+          message: "Product not found",
           data: result,
         })
       }
       res.json({
         success: true,
-        message: 'Product fetched successfully!',
+        message: "Product fetched successfully!",
         data: result,
       })
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: 'something went wrong',
+        message: "something went wrong",
         data: error,
       })
     }
@@ -76,12 +76,27 @@ const getProductById = async (req: Request, res: Response) => {
         if (!result) {
         return res.status(401).json({
           success: false,
-          message: 'Product not found',
+          message: "Product not found",
         });
       }
       res.status(200).json({
         success: true,
-        message: 'Update Product Information successfully',
+        message: "Update Product Information successfully",
+        data: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const deleteProductFromDB = async (req: Request, res: Response) => {
+    try {
+      const { productId } = req.params;
+      const result = await productServices.deleteProductFromDB(productId);
+      res.status(200).json({
+        success: true,
+        message: "Product deleted successfully",
         data: result,
       });
     } catch (error) {
@@ -93,5 +108,6 @@ export const productController = {
     createProduct,
     getAllProducts,
     getProductById,
-    updateProductInfo
+    updateProductInfo,
+    deleteProductFromDB
 }
