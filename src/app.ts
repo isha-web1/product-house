@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 // application routes
-app.use('/products/api', productRoutes)
+app.use('/api/products', productRoutes)
 
 const getAController = (req : Request , res : Response) => {
     res.send('Hello World!')
