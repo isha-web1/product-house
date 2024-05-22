@@ -10,7 +10,7 @@ export type Inventory = {
     inStock : true
 }
 
-export type Product = {
+export type ProductT = {
     name : string,
     description : string,
     price : number,

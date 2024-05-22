@@ -10,4 +10,6 @@ router.get('/products', productController.getAllProducts)
 
 router.get('/:productId', productController.getProductById)
 
+router.put('/:productId', productController.updateProductInfo)
+
 export const productRoutes = router;
