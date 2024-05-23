@@ -7,7 +7,7 @@ export type Variants ={
 }
 export type Inventory = {
     quantity : number,
-    inStock : true
+    inStock : boolean
 }
 
 export type ProductT = {
@@ -15,7 +15,7 @@ export type ProductT = {
     description : string,
     price : number,
     category : string,
-    tags : "computer" | "peripherals" | "wireless" | "ergonomic",
+    tags : string[],
     inventory : Inventory ,
-    variants : [Variants]
+    variants : Variants[]
 }

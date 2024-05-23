@@ -1,16 +1,22 @@
 import { Request, Response } from "express";
 // import {product} from './products.interface'
 import { productServices } from "./product.service";
-
+import ProductValidationSchema from "./product.validation";
 const createProduct = async(req : Request, res : Response) =>{
 
    try{
+
+    
     const product = req.body.product;
+     
+    // creating a schema validation using zod
+
+    const zodParseData = ProductValidationSchema.parse(product)
     
 
     // will call service function to send this data
 
-    const result = await productServices.createProductIntoDb(product)
+    const result = await productServices.createProductIntoDb(zodParseData)
     console.log(result)
 
     // send response
@@ -40,6 +46,7 @@ const getAllProducts = async(req: Request, res : Response) =>{
         console.log(error)
     }
 }
+// get product from Db through Id
 const getProductById = async (req: Request, res: Response) => {
     try {
       const { productId } = req.params
@@ -65,7 +72,7 @@ const getProductById = async (req: Request, res: Response) => {
     }
   }
 
-
+// update product information
   const updateProductInfo = async (req: Request, res: Response) => {
     try {
       const { productId } = req.params;
@@ -89,7 +96,7 @@ const getProductById = async (req: Request, res: Response) => {
     }
   };
 
-
+// Delete product from Db
   const deleteProductFromDB = async (req: Request, res: Response) => {
     try {
       const { productId } = req.params;

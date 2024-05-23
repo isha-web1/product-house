@@ -31,7 +31,10 @@ const ProductSchema= new Schema<ProductT>({
      description : {type : String, required : true},
      price : {type : Number, required : true},
      category : {type : String, required : true},
-     tags : ["computer" ,"peripherals" , "wireless" , "ergonomic"],
+     tags : {
+      type : String,
+      enum : ["computer" ,"peripherals" , "wireless" , "ergonomic"]
+     },
      variants : {
          type : [VariantsSchema],
          required : true

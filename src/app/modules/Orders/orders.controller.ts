@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { orderService } from "./orders.service";
+import { orderValidationSchema } from "./order.validation";
 
-
+// create new order to DB
 const createNewOrder = async(req: Request, res: Response) =>{
     try{
         const {order} = req.body
-        const result = await orderService.createNewOrder(order)
+        // create zod validation through zod
+        const zodParseData = orderValidationSchema.parse(order)
+        const result = await orderService.createNewOrder(zodParseData)
          
         res.status(200).json({
             success : true,
@@ -17,7 +20,7 @@ const createNewOrder = async(req: Request, res: Response) =>{
     }
 }
 
-
+// get all order to Db
 const getAllOrders = async (req: Request, res: Response) => {
     try {
       const { email } = req.query
