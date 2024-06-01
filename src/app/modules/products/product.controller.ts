@@ -7,11 +7,11 @@ const createProduct = async(req : Request, res : Response) =>{
    try{
 
     
-    const product = req.body.product;
+    const productData = req.body;
      
     // creating a schema validation using zod
 
-    const zodParseData = ProductValidationSchema.parse(product)
+    const zodParseData = ProductValidationSchema.parse(productData)
     
 
     // will call service function to send this data
@@ -111,10 +111,40 @@ const getProductById = async (req: Request, res: Response) => {
     }
   };
 
+  // Search a product
+  const SearchProduct = async(req:Request, res:Response) =>{
+    try{
+        const SearchItem = req.query.searchTerm
+        if(!SearchItem){
+          const result = await productServices.getAllProductsFromDb()
+          res.status(200).json({
+            success: true,
+            message: 'Products fetched successfully!',
+            data: result,
+          });
+        }else{
+          const result = await productServices.searchProductFromDB(SearchItem)
+          res.status(200).json({
+            success: true,
+            message: ` search term '${SearchItem}' fetched successfully!`,
+            data: result,
+          });
+        }
+    }catch(err){
+      res.status(500).json({
+        success: false,
+        message:
+          "Something went wrong!",
+        error: err,
+      });
+    }
+  }
+
 export const productController = {
     createProduct,
     getAllProducts,
     getProductById,
     updateProductInfo,
-    deleteProductFromDB
+    deleteProductFromDB,
+    SearchProduct
 }

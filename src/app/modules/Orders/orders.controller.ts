@@ -5,9 +5,9 @@ import { orderValidationSchema } from "./order.validation";
 // create new order to DB
 const createNewOrder = async(req: Request, res: Response) =>{
     try{
-        const {order} = req.body
+        const orderData = req.body
         // create zod validation through zod
-        const zodParseData = orderValidationSchema.parse(order)
+        const zodParseData = orderValidationSchema.parse(orderData)
         const result = await orderService.createNewOrder(zodParseData)
          
         res.status(200).json({
@@ -60,6 +60,40 @@ const getAllOrders = async (req: Request, res: Response) => {
       })
     }
   }
+
+  // Retrieve Orders by User Email
+
+  // const getOrdersByEmail = async(req:Request, res:Response) =>{
+  //   try{
+  //      const orderEmail = req.query.email;
+  //      if (!orderEmail) {
+  //       const result = await orderService.getAllOrders();
+  //       // console.log('first', result);
+  //       // send response
+  //       res.status(200).json({
+  //         success: true,
+  //         message: 'Orders fetched successfully!',
+  //         data: result,
+  //       });
+  //     }else{
+         
+  //     const result = await orderService.getOrderByEmail(orderEmail);
+  //     // console.log('return:', result);
+
+  //     res.status(200).json({
+  //       success: result.length === 0 ? false : true,
+  //       message:
+  //         result.length === 0
+  //           ? 'Order not found'
+  //           : 'Orders fetched successfully for user email!',
+  //       data: result,
+  //     });
+    
+  //     }
+  //   }catch(err){
+
+  //   }
+  // }
 
 export const orderController = {
     createNewOrder,

@@ -14,7 +14,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/orders', OrderRoutes);
 
 const getAController = (req : Request , res : Response) => {
-    res.send('Hello World!')
+    res.send('Hello World!!')
   }
 
 app.get('/', getAController)
